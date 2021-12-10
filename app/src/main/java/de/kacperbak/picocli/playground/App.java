@@ -3,12 +3,12 @@
  */
 package de.kacperbak.picocli.playground;
 
+import picocli.CommandLine;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        int exitCode = new CommandLine(new CheckSum()).execute(args);
+        System.exit(exitCode);
     }
 }
