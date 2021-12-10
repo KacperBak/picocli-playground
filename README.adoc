@@ -1,2 +1,21 @@
 = README
 
+== Packaging and Running
+
+=== Creating a fat jar
+This is achieved using the shadow plugin. Including it adds the `shadowJar` task to gradle. This task is execute running the simple
+
+....
+./gradlew build
+....
+
+=== Running the app
+After building the artifact the fat/uber jar can be found in `app/build/libs`.
+
+....
+java -jar app-all.jar
+....
+
+== Sources
+- https://imperceptiblethoughts.com/shadow/getting-started/#default-java-groovy-tasks
+
