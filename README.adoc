@@ -1,21 +1,31 @@
 = README
 
-== Packaging and Running
-
-=== Creating a fat jar
-This is achieved using the shadow plugin. Including it adds the `shadowJar` task to gradle. This task is execute running the simple
-
+== Inner Cycle aka. Developer Loop
+Using the `application` plugin also includes the `java` and `distribution` plugins.
+Since the final artifact is an __CLI__ application the way to use it is:
 ....
-./gradlew build
+app --option0 --option1 --optionN -f=someFile param0 param1 paramN
 ....
 
-=== Running the app
-After building the artifact the fat/uber jar can be found in `app/build/libs`.
+To create the app, simply execute the Gradle `installDist` task.
+This creates an executable startup scripts in the `app/build/install/app/bin` folder with the content:
+....
+.
+├── bin
+│   ├── app
+│   └── app.bat
+└── lib
+    ├── app.jar
+    ├── picocli-4.6.2.jar
+    └── ...
+....
 
-....
-java -jar app-all.jar
-....
+The scripts `app` and `app.bat` are able to execute the cli-app depending on your OS `unix based/windows`.
+
+== Packaging
+To package the app as `app.tar` and `app.zip` simply run the Gradle task `assembleDist`.
+
 
 == Sources
-- https://imperceptiblethoughts.com/shadow/getting-started/#default-java-groovy-tasks
-
+- https://docs.gradle.org/current/userguide/java_plugin.html#java_plugin[Java plugin]
+- https://docs.gradle.org/current/userguide/distribution_plugin.html#distribution_plugin[Distribution plugin]

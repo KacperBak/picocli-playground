@@ -9,9 +9,6 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-
-    // enables the 'shadowJar' task which creates a fat/uber jar including all dependencies that is executable
-    id 'com.github.johnrengelman.shadow' version '7.1.0'
 }
 
 repositories {
@@ -28,7 +25,12 @@ dependencies {
 
     // pico cli
     implementation 'info.picocli:picocli:4.6.2'
+    annotationProcessor 'info.picocli:picocli-codegen:4.6.2'
 
+}
+
+compileJava {
+    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
 }
 
 application {
