@@ -29,3 +29,4 @@ To package the app as `app.tar` and `app.zip` simply run the Gradle task `assemb
 == Sources
 - https://docs.gradle.org/current/userguide/java_plugin.html#java_plugin[Java plugin]
 - https://docs.gradle.org/current/userguide/distribution_plugin.html#distribution_plugin[Distribution plugin]
+- http://catb.org/~esr/writings/taoup/html/ch10s05.html#id2948149[Unix command line options A-Z]

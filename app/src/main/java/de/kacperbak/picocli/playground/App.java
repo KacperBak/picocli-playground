@@ -3,12 +3,13 @@
  */
 package de.kacperbak.picocli.playground;
 
+import de.kacperbak.picocli.playground.commands.HelloCommand;
 import picocli.CommandLine;
 
 public class App {
 
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new Greeting()).execute(args);
+        int exitCode = new CommandLine(new HelloCommand()).execute(args);
         System.exit(exitCode);
     }
 }
