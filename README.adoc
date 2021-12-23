@@ -1,2 +1,77 @@
 = README
 
+== Description
+This simple playground cli app is inspired by https://en.wikipedia.org/wiki/Cowsay[cowsay].
+It simply displays some motives using AsciiArt like this one:
+....
+---------
+asdf qwer
+---------
+  .
+   .
+    says the Cow...
+     .
+      .
+       ^__^
+       (oo)\_______
+       (__)\       )\/\
+           ||----w |
+           ||     ||
+....
+So it's purpose is to play around with https://picocli.info/[picocli].
+
+== Inner Cycle aka. Developer Loop
+Using the `application` plugin also includes the `java` and `distribution` plugins.
+Since the final artifact is an __CLI__ application the way to use it is:
+....
+app --option0 --option1 --optionN -f=someFile param0 param1 paramN
+....
+
+To create the app, simply execute the Gradle `installDist` task.
+This creates an executable startup scripts in the `app/build/install/app/bin` folder with the content:
+....
+.
+├── bin
+│   ├── app
+│   └── app.bat
+└── lib
+    ├── app.jar
+    ├── picocli-4.6.2.jar
+    └── ...
+....
+
+The scripts `app` and `app.bat` are able to execute the cli-app depending on your OS `unix based/windows`.
+
+== Testing
+By executing the Gradle task `build` also the unit tests are executed.
+....
+> Task :app:compileJava UP-TO-DATE
+> Task :app:processResources NO-SOURCE
+> Task :app:classes UP-TO-DATE
+> Task :app:jar UP-TO-DATE
+> Task :app:startScripts UP-TO-DATE
+> Task :app:distTar UP-TO-DATE
+> Task :app:distZip UP-TO-DATE
+> Task :app:assemble UP-TO-DATE
+> Task :app:compileTestJava
+> Task :app:processTestResources NO-SOURCE
+> Task :app:testClasses
+> Task :app:test
+> Task :app:check
+> Task :app:build
+
+BUILD SUCCESSFUL in 996ms
+7 actionable tasks: 2 executed, 5 up-to-date
+....
+
+== Packaging
+To package the app as `app.tar` and `app.zip` simply run the Gradle task `assembleDist`.
+
+== Sources
+- https://picocli.info/[picocli - docs]
+- https://github.com/remkop/picocli[picocli - repo]
+- https://stackoverflow.com/questions/36495669/difference-between-terms-option-argument-and-parameter/36495940[Difference between terms: "option", "argument", and "parameter"?]
+- https://stackoverflow.com/questions/1101957/are-there-any-standard-exit-status-codes-in-linux/40484670#40484670[UNIX exist status codes]
+- https://docs.gradle.org/current/userguide/java_plugin.html#java_plugin[Java plugin]
+- https://docs.gradle.org/current/userguide/distribution_plugin.html#distribution_plugin[Distribution plugin]
+- http://catb.org/~esr/writings/taoup/html/ch10s05.html#id2948149[Unix command line options A-Z]
