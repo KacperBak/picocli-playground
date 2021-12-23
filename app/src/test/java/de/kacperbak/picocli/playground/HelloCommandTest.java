@@ -61,14 +61,14 @@ class HelloCommandTest {
     void test_NoOptions_NoParams() {
 
         // given
-        String expected = "<your message here>";
+        String expectedDefaultMessage = "<your message here>";
 
         // when
         String[] args = new String [0];
         new CommandLine(new HelloCommand()).execute(args);
 
         // then
-        assertTrue(out.toString().contains(expected));
+        assertTrue(out.toString().contains(expectedDefaultMessage));
         assertEquals("", err.toString());
     }
 
@@ -93,14 +93,14 @@ class HelloCommandTest {
     void test_NoOptions_OneMessageParam() {
 
         // given
-        String expected = "asdf";
+        String expectedMessage = "asdf";
 
         // when
         String[] args = {"asdf"};
         new CommandLine(new HelloCommand()).execute(args);
 
         // then
-        assertTrue(out.toString().contains(expected));
+        assertTrue(out.toString().contains(expectedMessage));
         assertEquals("", err.toString());
     }
 
