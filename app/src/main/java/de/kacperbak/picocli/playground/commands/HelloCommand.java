@@ -19,7 +19,7 @@ public class HelloCommand implements Callable<Integer> {
         boolean tuxSay;
     }
 
-    // Note: using Optional<ExclusiveSayOptions> type here results in a reflection exc
+    // Note: Using Optional<ExclusiveSayOptions> type here results in a reflection exc
     @ArgGroup(exclusive = true, multiplicity = "0..1")
     ExclusiveSayOptions exclusiveSayOption;
 
@@ -37,6 +37,8 @@ public class HelloCommand implements Callable<Integer> {
         if (exclusiveSayOption.tuxSay){
             return HelloService.tuxSay(message);
         }
-        return 1;
+        // Something has gone wrong with the input handling. So return exit status code 2.
+        // Why '2' because of: https://stackoverflow.com/questions/1101957/are-there-any-standard-exit-status-codes-in-linux/40484670#40484670
+        return 2;
     }
 }
