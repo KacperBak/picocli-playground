@@ -173,4 +173,32 @@ class HelloCommandTest {
         assertTrue(out.toString().contains(expectedSaying));
         assertEquals("", err.toString());
     }
+
+    /**
+     * Calling: ./app/bin/app -aa 'asdf'
+     * Results in:
+     * Unknown option: '-aa'
+     * Usage: hello [-hV] [-cw | -tx] <message>
+     * Let's say something the UNIX way
+     *       <message>       The message to say
+     *       -cw, --cowSay   Enable the Cow to say something
+     *   -h, --help          Show this help message and exit.
+     *       -tx, --tuxSay   Enable the Tux to say something
+     *   -V, --version       Print version information and exit
+     */
+    @Test
+    void test_WrongOption_OneMessageParam() {
+
+        // given
+        String expectedError = "Unknown option: '-aa'";
+        int expectedErrorStatusCode = 2;
+
+        // when
+        String[] args = {"-aa", "asdf"};
+        int actualExitStatusCode = new CommandLine(new HelloCommand()).execute(args);
+
+        // then
+        assertEquals(expectedErrorStatusCode, actualExitStatusCode);
+        assertTrue(err.toString().contains(expectedError));
+    }
 }
