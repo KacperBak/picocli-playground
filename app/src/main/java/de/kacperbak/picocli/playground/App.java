@@ -5,6 +5,7 @@ package de.kacperbak.picocli.playground;
 
 import de.kacperbak.picocli.playground.commands.AsciiCommand;
 import de.kacperbak.picocli.playground.commands.LoremCommand;
+import picocli.AutoComplete.GenerateCompletion;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Model.CommandSpec;
@@ -13,7 +14,7 @@ import picocli.CommandLine.Spec;
 @Command(name = "app",
         description = "Say common nerdy things",
         mixinStandardHelpOptions = true, version = "1.0",
-        subcommands = {AsciiCommand.class, LoremCommand.class}
+        subcommands = {AsciiCommand.class, LoremCommand.class, GenerateCompletion.class}
 )
 public class App implements Runnable {
 
