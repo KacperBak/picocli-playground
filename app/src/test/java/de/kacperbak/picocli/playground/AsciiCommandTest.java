@@ -3,7 +3,8 @@
  */
 package de.kacperbak.picocli.playground;
 
-import de.kacperbak.picocli.playground.commands.HelloCommand;
+import de.kacperbak.picocli.playground.commands.AsciiCommand;
+import de.kacperbak.picocli.playground.service.impl.AsciiService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,13 +13,14 @@ import picocli.CommandLine;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * More details on testing picocli:
  * https://picocli.info/#_testing_the_output
  */
-class HelloCommandTest {
+class AsciiCommandTest {
 
     final PrintStream originalOut = System.out;
     final PrintStream originalErr = System.err;
@@ -65,7 +67,7 @@ class HelloCommandTest {
 
         // when
         String[] args = new String [0];
-        new CommandLine(new HelloCommand()).execute(args);
+        new CommandLine(new AsciiCommand(new AsciiService())).execute(args);
 
         // then
         assertTrue(out.toString().contains(expectedDefaultMessage));
@@ -97,7 +99,7 @@ class HelloCommandTest {
 
         // when
         String[] args = {"asdf"};
-        new CommandLine(new HelloCommand()).execute(args);
+        new CommandLine(new AsciiCommand(new AsciiService())).execute(args);
 
         // then
         assertTrue(out.toString().contains(expectedMessage));
@@ -130,7 +132,7 @@ class HelloCommandTest {
 
         // when
         String[] args = {"-cw", "asdf"};
-        new CommandLine(new HelloCommand()).execute(args);
+        new CommandLine(new AsciiCommand(new AsciiService())).execute(args);
 
         // then
         assertTrue(out.toString().contains(expectedMessage));
@@ -166,7 +168,7 @@ class HelloCommandTest {
 
         // when
         String[] args = {"-tx", "asdf"};
-        new CommandLine(new HelloCommand()).execute(args);
+        new CommandLine(new AsciiCommand(new AsciiService())).execute(args);
 
         // then
         assertTrue(out.toString().contains(expectedMessage));
@@ -195,7 +197,7 @@ class HelloCommandTest {
 
         // when
         String[] args = {"-aa", "asdf"};
-        int actualExitStatusCode = new CommandLine(new HelloCommand()).execute(args);
+        int actualExitStatusCode = new CommandLine(new AsciiCommand(new AsciiService())).execute(args);
 
         // then
         assertEquals(expectedErrorStatusCode, actualExitStatusCode);
