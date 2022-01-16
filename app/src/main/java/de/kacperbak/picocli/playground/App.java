@@ -3,13 +3,35 @@
  */
 package de.kacperbak.picocli.playground;
 
-import de.kacperbak.picocli.playground.commands.HelloCommand;
+import de.kacperbak.picocli.playground.commands.AsciiCommand;
+import de.kacperbak.picocli.playground.commands.LoremCommand;
 import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Model.CommandSpec;
+import picocli.CommandLine.Spec;
 
-public class App {
+@Command(name = "app",
+        description = "Say common nerdy things",
+        mixinStandardHelpOptions = true, version = "1.0",
+        subcommands = {AsciiCommand.class, LoremCommand.class}
+)
+public class App implements Runnable {
+
+    @Spec
+    CommandSpec spec;
+
+    @Override
+    public void run() {
+        // error handling: if the app command was invoked without subcommands, show the help
+        spec.commandLine().usage(System.err);
+    }
 
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new HelloCommand()).execute(args);
+
+        // create all commands with already wired dependencies
+        var factory = new AppFactory();
+
+        int exitCode = new CommandLine(new App(), factory).execute(args);
         System.exit(exitCode);
     }
 }

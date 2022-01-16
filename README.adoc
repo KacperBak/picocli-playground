@@ -1,8 +1,16 @@
 = README
 
+== NEXT
+
+- IN-PROGRESS example with subcommands
+- example with auto-completion
+- example with native image
+
 == Description
+
 This simple playground cli app is inspired by https://en.wikipedia.org/wiki/Cowsay[cowsay].
 It simply displays some motives using AsciiArt like this one:
+
 ....
 ---------
 asdf qwer
@@ -18,17 +26,39 @@ asdf qwer
            ||----w |
            ||     ||
 ....
+
 So it's purpose is to play around with https://picocli.info/[picocli].
 
-== Inner Cycle aka. Developer Loop
-Using the `application` plugin also includes the `java` and `distribution` plugins.
+== Usage
+
 Since the final artifact is an __CLI__ application the way to use it is:
+
 ....
 app --option0 --option1 --optionN -f=someFile param0 param1 paramN
 ....
 
+=== hello command
+
+....
+app           -> "error handling display help"
+app hello     -> "unix say"
+app hello -cw -> "cow say"
+app hello -tw -> "tux say"
+....
+
+=== lorem command
+
+....
+app lorem      -> "Lorem ipsum dolor sit amet..."
+app lorem -n=2 -> "Lorem ipsum dolor sit amet...\n Lorem ipsum dolor sit amet"
+....
+
+== Inner Cycle aka. Developer Loop
+
+Using the `application` plugin also includes the `java` and `distribution` plugins.
 To create the app, simply execute the Gradle `installDist` task.
 This creates an executable startup scripts in the `app/build/install/app/bin` folder with the content:
+
 ....
 .
 ├── bin
